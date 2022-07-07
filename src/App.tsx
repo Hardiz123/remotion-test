@@ -15,6 +15,10 @@ const  App : React.FC = () => {
       controls
       autoPlay={true}
       fps={30}
+      style={{
+        width:'100vh',
+        height:'55.5vh',
+      }}
       />
     </div>
   );
