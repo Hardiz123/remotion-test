@@ -9,11 +9,14 @@ interface contextInterface {
   url: string;
 }
 
-export const Value = createContext<contextInterface | null>({ inputText: '', url: '' });
+export const Value = createContext<contextInterface>({ inputText: '', url: '' });
 
 const App: React.FC = () => {
-  const [inputText, setinputText] = useState("");
-  const [player, setPlayer] = useState<boolean | null>(null);
+  const [inputText, setinputText] = useState<string>("");
+
+  const [player, setPlayer] = useState<boolean | null>(false);
+
+
   const [url, setUrl] = useState<string>("");
 
   useEffect(() => {
@@ -36,12 +39,7 @@ const App: React.FC = () => {
   }, [player])
 
   return (
-    <Value.Provider value={
-      {
-        inputText,
-        url
-      }
-    } >
+    <Value.Provider value={{inputText,url}} >
       <div className="App">
         {player && url && <Player
           component={Demo}
@@ -60,10 +58,11 @@ const App: React.FC = () => {
           }}
         />}
         <input type="text" value={inputText} onChange={(e) => setinputText(e.target.value)} />
-        <button onClick={() => setPlayer(!player)}>Play</button>
+        <button onClick={() => setPlayer(!player)}>Play</button> 
       </div>
     </Value.Provider>
   );
 }
 
 export default App;
+// false --> click --
