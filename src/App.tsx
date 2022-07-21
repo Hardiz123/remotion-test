@@ -62,7 +62,6 @@ const App: React.FC = () => {
         <input type="text" value={inputText} onChange={(e) => setinputText(e.target.value)} />
         <button onClick={() => setPlayer(!player)}>Play</button>
       </div>
-
     </Value.Provider>
   );
 }
