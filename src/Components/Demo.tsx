@@ -10,10 +10,12 @@ import {
 import { Subtitle } from './Subtitle';
 import { Title } from './Title';
 import img from '../assets/dangri.webp';
-
+import { Audio } from 'remotion';
+import { useContext } from 'react';
+import { Value } from '../App';
 
 export const Demo: React.FC = () => {
-
+  const value = useContext(Value);
   const frame = useCurrentFrame();
   const { durationInFrames, fps } = useVideoConfig();
 
@@ -31,13 +33,13 @@ export const Demo: React.FC = () => {
     frame: frame - 10,
     fps,
     config: {
-      damping : 100
+      damping: 100
     },
   });
 
   const opacity = interpolate(
     frame,
-    [0, 20, durationInFrames - 40, durationInFrames ],
+    [0, 20, durationInFrames - 40, durationInFrames],
     [0, 1, 1, 0]
   );
 
@@ -52,18 +54,22 @@ export const Demo: React.FC = () => {
   );
 
 
-
   return (
-    <AbsoluteFill style={{ backgroundPosition:'center', backgroundImage:`url(${img})`, display: 'flex', justifyContent: 'center', alignItems: 'left' }}>
-      <div style={{height: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '50%',backgroundImage: `linear-gradient(to right, #FF99DA, #C63287)`, opacity, transform: `translateX(${divTranslation}px)`, borderRadius:'10px' }}>
-        <Sequence from={35} >
-          <Title titleText="Hello there" titleColor='white' />
-          <Sequence from={10} >
-            <Subtitle />
+    <div>
+      <AbsoluteFill style={{ backgroundPosition: 'center', backgroundImage: `url(${img})`, display: 'flex', justifyContent: 'center', alignItems: 'left' }}>
+       
+        <div style={{ height: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '50%', backgroundImage: `linear-gradient(to right, #FF99DA, #C63287)`, opacity, transform: `translateX(${divTranslation}px)`, borderRadius: '10px' }}>
+          <Sequence from={35} >
+            <Title titleText={value?.inputText!} titleColor='white' />
+            <Audio src={value?.url!}
+          endAt={durationInFrames}
+        />
+            <Sequence from={10} >
+              <Subtitle />
+            </Sequence>
           </Sequence>
-        </Sequence>
-      </div>
-
-    </AbsoluteFill>
+        </div>
+      </AbsoluteFill>
+    </div>
   );
 }
