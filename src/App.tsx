@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useState, useEffect } from 'react';
 import { Player } from '@remotion/player';
 import './App.css';
@@ -27,18 +28,12 @@ const App: React.FC = () => {
         })
       }).then((response: Response) => {
         response.blob().then((blob: Blob) => {
-          console.log(blob);
-
           const url = URL.createObjectURL(blob);
-
           setUrl(url);
-          console.log(url);
-
         })
       })
     }
   }, [player])
-
 
   return (
     <Value.Provider value={
