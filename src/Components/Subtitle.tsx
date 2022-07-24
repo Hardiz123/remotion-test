@@ -16,12 +16,14 @@ const codeStyle: React.CSSProperties = {
 	color: COLOR_1,
 };
 
-export const Subtitle: React.FC = () => {
+export const Subtitle: React.FC<{
+	title? : string;
+}> = ({ title }) => {
 	const frame = useCurrentFrame();
 	const opacity = interpolate(frame, [0, 30,50 ,  60], [0, 1, 1, 0]);
 	return (
 		<div style={{...subtitle, opacity }}>
-			This was done by remotion
+			{title ? title : "This was done by remotion"}
 		</div>
 	);
 };

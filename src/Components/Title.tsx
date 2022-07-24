@@ -23,7 +23,6 @@ export const Title: React.FC<{
 	titleColor: string;
 }> = ({ titleText, titleColor }) => {
 	const { durationInFrames, fps } = useVideoConfig();
-	const videoConfig = useVideoConfig();
 	const frame = useCurrentFrame();
 
 	const words = titleText.split(' ');
@@ -36,12 +35,13 @@ export const Title: React.FC<{
 				const delay = i * 5;
 
 				const scale = spring({
-					fps: videoConfig.fps,
+					fps: fps,
 					frame: frame - delay,
 					config: {
 						damping: 200,
 					},
 				});
+
 				const opacity = interpolate(
 					frame,
 					[0, 20, durationInFrames - 80 + delay, durationInFrames - 60 + delay],

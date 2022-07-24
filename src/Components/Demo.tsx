@@ -39,7 +39,13 @@ export const Demo: React.FC = () => {
 
   const opacity = interpolate(
     frame,
-    [0, 20, durationInFrames - 40, durationInFrames],
+    [0, 20, 150 - 40, 150],
+    [0, 1, 1, 0]
+  );
+
+  const opacityImg = interpolate(
+    frame,
+    [(durationInFrames/2), 181, durationInFrames -30, durationInFrames],
     [0, 1, 1, 0]
   );
 
@@ -55,21 +61,39 @@ export const Demo: React.FC = () => {
 
 
   return (
-    <div>
+  
       <AbsoluteFill style={{ backgroundPosition: 'center', backgroundImage: `url(${img})`, display: 'flex', justifyContent: 'center', alignItems: 'left' }}>
-       
-        <div style={{ height: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '50%', backgroundImage: `linear-gradient(to right, #FF99DA, #C63287)`, opacity, transform: `translateX(${divTranslation}px)`, borderRadius: '10px' }}>
-          <Sequence from={35} >
-            <Title titleText={value?.inputText!} titleColor='white' />
-            <Audio src={value?.url!}
-          endAt={durationInFrames}
-        />
-            <Sequence from={10} >
-              <Subtitle />
+        <Sequence from={0} durationInFrames={150} layout="none">
+          <div style={{ height: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '50%', backgroundImage: `linear-gradient(to right, #FF99DA, #C63287)`, opacity, transform: `translateX(${divTranslation}px)`, borderRadius: '10px' }}>
+            <Sequence from={35} >
+              <Title titleText={value?.inputText!} titleColor='white' />
+              <Audio src={value?.url!}
+                endAt={150}
+              />
+              <Sequence from={10} >
+                <Subtitle />
+              </Sequence>
             </Sequence>
+          </div>
+        </Sequence>
+        <Sequence from ={151} durationInFrames={150} layout='none'>
+          <img src={img} alt="img" style={{
+            width: '50%',
+            height: '50%',
+            opacity : opacityImg,
+            marginLeft: '200px',
+            borderRadius: '50%'
+          }} />
+        </Sequence>    
+        <Sequence from ={301} durationInFrames={30} layout='none'>
+          <div style={{
+            width: '50%',
+            height: '50%'
+          }}>
+           <Subtitle title="By there" />
+          </div>
           </Sequence>
-        </div>
       </AbsoluteFill>
-    </div>
+  
   );
 }
