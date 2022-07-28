@@ -13,7 +13,8 @@ import img from '../assets/dangri.webp';
 import { Audio } from 'remotion';
 import { useContext } from 'react';
 import { Value } from '../App';
-
+import './demo.styles.css';
+import Details from './Details';
 export const Demo: React.FC = () => {
   const value = useContext(Value);
   const frame = useCurrentFrame();
@@ -45,9 +46,12 @@ export const Demo: React.FC = () => {
 
   const opacityImg = interpolate(
     frame,
-    [(durationInFrames/2), 181, durationInFrames -30, durationInFrames],
+    [151, 181, 331, 361],
     [0, 1, 1, 0]
   );
+
+  console.log(opacityImg);
+  
 
   const divTranslation = interpolate(
     divTranslationProgress,
@@ -61,39 +65,42 @@ export const Demo: React.FC = () => {
 
 
   return (
-  
-      <AbsoluteFill style={{ backgroundPosition: 'center', backgroundImage: `url(${img})`, display: 'flex', justifyContent: 'center', alignItems: 'left' }}>
-        <Sequence from={0} durationInFrames={150} layout="none">
-          <div style={{ height: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '50%', backgroundImage: `linear-gradient(to right, #FF99DA, #C63287)`, opacity, transform: `translateX(${divTranslation}px)`, borderRadius: '10px' }}>
-            <Sequence from={35} >
-              <Title titleText={value?.inputText!} titleColor='white' />
-              <Audio src={value?.url!}
-                endAt={150}
-              />
-              <Sequence from={10} >
-                <Subtitle />
-              </Sequence>
+
+    <AbsoluteFill style={{ backgroundPosition: 'center', backgroundImage: `url(${img})`, display: 'flex', justifyContent: 'center', alignItems: 'left' }}>
+      <Sequence from={0} durationInFrames={150} layout="none">
+        <div style={{ height: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '50%', backgroundImage: `linear-gradient(to right, #FF99DA, #C63287)`, opacity, transform: `translateX(${divTranslation}px)`, borderRadius: '10px' }}>
+          <Sequence from={35}>
+            <Title titleText={value?.inputText!} titleColor='white' />
+            <Audio src={value?.url!}
+              endAt={150}
+            />
+            <Sequence from={10} >
+              <Subtitle />
             </Sequence>
-          </div>
-        </Sequence>
-        <Sequence from ={151} durationInFrames={150} layout='none'>
-          <img src={img} alt="img" style={{
-            width: '50%',
-            height: '50%',
-            opacity : opacityImg,
-            marginLeft: '200px',
-            borderRadius: '50%'
-          }} />
-        </Sequence>    
-        <Sequence from ={301} durationInFrames={30} layout='none'>
-          <div style={{
-            width: '50%',
-            height: '50%'
-          }}>
-           <Subtitle title="By there" />
-          </div>
           </Sequence>
-      </AbsoluteFill>
-  
+        </div>
+      </Sequence>
+      <Sequence from={151} durationInFrames={210} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
+        <Audio src={'https://www.televisiontunes.com/uploads/audio/Friends.mp3'} endAt={210} />
+        {/* <img src={img} alt="img" style={{
+          width: '60%',
+          height: '60%',
+          opacity: opacityImg,
+          borderRadius: '50%'
+        }} /> */}
+        <div className="infoContainer" style={{opacity : opacityImg}}>
+          <Details />
+        </div>
+      </Sequence>
+      <Sequence from={361} durationInFrames={40} layout='none'>
+        <div style={{
+          width: '50%',
+          height: '50%'
+        }}>
+          <Subtitle title="Have a good day" />
+        </div>
+      </Sequence>
+    </AbsoluteFill>
+
   );
 }

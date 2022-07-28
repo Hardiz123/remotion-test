@@ -1,0 +1,14 @@
+.infoContainer {
+    background:  url(../assets/FRIENDS.webp) no-repeat;
+    background-size: cover;
+    width: 60%;
+    height: 60%;
+
+}
+ul {
+    margin-top: 5%;
+}
+
+li {
+    padding-bottom: 20px;
+}

@@ -43,7 +43,7 @@ const App: React.FC = () => {
       <div className="App">
         {player && url && <Player
           component={Demo}
-          durationInFrames={331}
+          durationInFrames={401}
           compositionHeight={500}
           compositionWidth={900}
           controls
