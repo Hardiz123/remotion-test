@@ -1,0 +1,15 @@
+.introText {
+    font-size: 4.5em;
+    font-weight: bold;
+    color: #FF9803;
+    text-align: center;
+}
+
+.background {
+    background-image: url('../assets/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    
+}

@@ -9,47 +9,79 @@ interface speachObject {
 
 
 const details: React.CSSProperties = {
-    fontFamily: FONT_FAMILY,
+    fontFamily: 'IBM Plex Serif',
     fontWeight: 'bold',
     fontSize: 25,
     position: 'relative',
-    width: '100%',
+    marginLeft : '5%',
 }
 
 const ulStyle: React.CSSProperties = {
     listStyleType: 'circle',
-    color: 'red',
+    color: 'white',
     display: 'inline-block',
 }
 
 const displayText: speachObject[] = [
     {
         id: 1,
-        text: 'Friends'
+        text: '12 MP Dual main camera'
     },
     {
         id: 2,
-        text: 'an American television sitcom'
+        text: '12 MP dual selfie camera'
     },
     {
         id: 3,
-        text: 'created by David Crane and Marta Kauffman'
+        text: 'Fast charging, 50% in 30 min'
     },
     {
         id: 4,
-        text: 'which aired on NBC from September 22, 1994, to May 6, 2004'
+        text: 'upto 512GB storage'
+    },
+    {
+        id: 5,
+        text: '6.1 inches XDR display'
+    },
+    {
+        id: 6,
+        text: '174 g weight'
+    },
+    {
+        id: 7,
+        text: 'Scratch-resistant ceramic glass'
+    },
+    {
+        id: 8,
+        text: '1170 x 2532 pixels screen resolution'
+    },
+    {
+        id: 9,
+        text: 'Dual Stero speakers'
+    },
+    {
+        id: 10,
+        text: 'Magsafe with wireless charging'
     }
 ]
+
+
 
 function Details() {
     const { durationInFrames, fps } = useVideoConfig();
     const frame = useCurrentFrame();
+
+      const opacity = interpolate(
+    frame,
+    [durationInFrames-20, durationInFrames],
+    [1,0]
+  );
     return (
         <div style={details}>
-            <ul style={{ ...ulStyle }}  >
+            <ul style={{ ...ulStyle, opacity : opacity }}  >
                 {
                     displayText.map((t, i) => {
-                        const delay = i * 12;
+                        const delay = i * 20;
                         const scale = spring({
                             fps: fps,
                             frame: frame - delay,
@@ -59,8 +91,8 @@ function Details() {
                         });
                         const opacity = interpolate(
                             frame,
-                            [0, 20, durationInFrames - 80 + delay, durationInFrames - 60 + delay],
-                            [0, 1, 1, 0]
+                            [0, 20],
+                            [0, 1]
                         );
                         return (
                             <li key={t.id} style={{

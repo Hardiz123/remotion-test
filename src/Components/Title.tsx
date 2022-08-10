@@ -13,7 +13,6 @@ const title: React.CSSProperties = {
 };
 
 const word: React.CSSProperties = {
-	marginLeft: 10,
 	marginRight: 10,
 	display: 'inline-block',
 };
@@ -44,7 +43,7 @@ export const Title: React.FC<{
 
 				const opacity = interpolate(
 					frame,
-					[0, 20, durationInFrames - 80 + delay, durationInFrames - 60 + delay],
+					[0, 20, 150 - 80 + delay, 150 - 60 + delay],
 					[0, 1, 1, 0]
 				);
 				return (

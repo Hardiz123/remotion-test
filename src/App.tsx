@@ -41,15 +41,15 @@ const App: React.FC = () => {
   return (
     <Value.Provider value={{inputText,url}} >
       <div className="App">
-        {player && url && <Player
+        { <Player
           component={Demo}
-          durationInFrames={401}
+          durationInFrames={1800}
           compositionHeight={500}
           compositionWidth={900}
           controls
           doubleClickToFullscreen
           allowFullscreen
-          autoPlay={true}
+          autoPlay={false}
           fps={30}
           renderLoading={() => <div>Loading...</div>}
           style={{
