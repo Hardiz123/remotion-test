@@ -19,6 +19,7 @@ import './styles.css'
 import bg from '../assets/bg.jpg'
 import audio from './background.mp3';
 import { Iphone } from './iphone';
+import { CameraSample } from './cameraSamples';
 export const Demo: React.FC = () => {
   const value = useContext(Value);
   const frame = useCurrentFrame();
@@ -102,6 +103,9 @@ export const Demo: React.FC = () => {
         
         <Iphone/>
       </Sequence>
+      <Sequence from={750}>
+        <CameraSample />
+        </Sequence>
 
       <Audio src={audio} >
       </Audio>

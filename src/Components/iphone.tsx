@@ -33,7 +33,7 @@ export const Iphone: React.FC = () => {
 
     const divTranslation = interpolate(
         frame,
-        [0, 90, 380, 400],
+        [0, 90, 380, 390],
         [-250, 550, 550, 300],
         {
             extrapolateRight: "clamp",
@@ -43,8 +43,8 @@ export const Iphone: React.FC = () => {
 
     // roate using spring
     const rotate = spring({
-        frame: frame,
-        fps: fps + 120,
+        frame: frame - 5,
+        fps: fps + 100,
         config: {
             damping: 100,
         },
@@ -56,6 +56,28 @@ export const Iphone: React.FC = () => {
         [0, 360],
     );
 
+    const scale = interpolate(
+        frame,
+        [390, 450],
+        [1, 70],
+        {
+            extrapolateRight: "clamp",
+            extrapolateLeft: "clamp"
+        }
+    );
+
+    const imgOpacity = interpolate(
+        frame,
+        [390, 450],
+        [1, 0],
+        {
+            extrapolateRight: "clamp",
+            extrapolateLeft: "clamp"
+        }
+    );
+
+    console.log(scale);
+    
 
     return (
         <div className="iphone"
@@ -70,7 +92,8 @@ export const Iphone: React.FC = () => {
                 <img alt='iphone' src={photo} width='300px'
                     style={{
                         //rotate
-                        transform: `rotate(${rotateImg}deg)`,
+                        transform: `rotate(${rotateImg}deg) scale(${scale})`,
+                        opacity: imgOpacity
                     }}
                 />
         </div>
