@@ -103,7 +103,7 @@ export const Demo: React.FC = () => {
         
         <Iphone/>
       </Sequence>
-      <Sequence from={750}>
+      <Sequence from={650}>
         <CameraSample />
         </Sequence>
 

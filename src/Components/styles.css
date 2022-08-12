@@ -13,3 +13,9 @@
     height: 100vh;
     
 }
+
+.heading {
+    font-family: 'IBM Plex Serif';
+    font-size: 1.6em;
+    font-weight: bold;
+}
