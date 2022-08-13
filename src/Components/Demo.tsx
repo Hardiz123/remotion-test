@@ -56,7 +56,7 @@ export const Demo: React.FC = () => {
   // );
 
   // console.log(opacityImg);
-  
+
 
   // const divTranslation = interpolate(
   //   divTranslationProgress,
@@ -69,43 +69,42 @@ export const Demo: React.FC = () => {
   // );
 
   const spring1 = spring({
-		frame : frame - 50,
-		fps : fps + 100,
-    config : {
-      damping : 100
+    frame: frame - 50,
+    fps: fps + 100,
+    config: {
+      damping: 100
     }
-	});
-	const size1 = interpolate(spring1, [0, 1], [0, 200]);
+  });
+  const size1 = interpolate(spring1, [0, 1], [1, 200]);
 
 
   return (
     <div >
-      
-    <Sequence from={0}>
-      <AbsoluteFill className='background' style={{ display:'flex', justifyContent:'center', alignItems:'center'}}>
-      <div
-      className='introText'
-      style={{
-        transform: `rotate(3600deg) scale(${1 + size1})`,
-      }}
-      >INRODUCING</div>
-      </AbsoluteFill>
-    </Sequence>
-    <Sequence from={120}>
-    <AbsoluteFill style={{ display:'flex', justifyContent:'center', alignItems:'center', background:'black'}}>
-      <Title titleText='The new Iphone 14 pro' titleColor='#FF9803' />
-      </AbsoluteFill>
+
+      <Sequence from={0}>
+        <AbsoluteFill className='background' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <div
+            className='introText'
+            style={{
+              transform: `rotate(3600deg) scale(${size1})`,
+            }}
+          >INRODUCING</div>
+        </AbsoluteFill>
+      </Sequence>
+      <Sequence from={120}>
+        <AbsoluteFill style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'black' }}>
+          <Title titleText='The new Iphone 14 pro' titleColor='#FF9803' />
+        </AbsoluteFill>
       </Sequence>
       <Sequence from={200}>
         <Sequence from={100} durationInFrames={250}>
-       <Details />
+          <Details />
         </Sequence>
-        
-        <Iphone/>
+        <Iphone />
       </Sequence>
       <Sequence from={650}>
         <CameraSample />
-        </Sequence>
+      </Sequence>
 
       <Audio src={audio} >
       </Audio>
