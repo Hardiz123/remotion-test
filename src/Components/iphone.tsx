@@ -1,12 +1,10 @@
 import React from 'react';
 import {
-    AbsoluteFill,
     interpolate,
-    Sequence,
     useCurrentFrame,
     useVideoConfig,
     spring,
-    Easing
+    Img
 } from 'remotion';
 import photo from '../assets/iphone.png';
 
@@ -34,7 +32,7 @@ export const Iphone: React.FC = () => {
     const divTranslation = interpolate(
         frame,
         [0, 90, 380, 390],
-        [-250, 550, 550, 300],
+        [-550, 250, 250, 10],
         {
             extrapolateRight: "clamp",
             extrapolateLeft: "clamp"
@@ -80,7 +78,7 @@ export const Iphone: React.FC = () => {
     
 
     return (
-        <div className="iphone"
+        <div
             style={
                 {
                     transform: `translate3d(${divTranslation}px, 0, 0)`,
@@ -89,7 +87,7 @@ export const Iphone: React.FC = () => {
                     alignItems: 'center',
                 }
             }>
-                <img alt='iphone' src={photo} width='300px'
+                <Img alt='iphone' src={photo} width='35%'
                     style={{
                         //rotate
                         transform: `rotate(${rotateImg}deg) scale(${scale})`,

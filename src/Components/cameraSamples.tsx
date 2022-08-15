@@ -5,7 +5,8 @@ import {
     Sequence,
     useCurrentFrame,
     useVideoConfig,
-    spring
+    spring,
+    Img
 } from 'remotion';
 import { COLOR_3 } from "./constants";
 import './styles.css';
@@ -71,7 +72,6 @@ export const CameraSample: React.FC = () => {
             <div style={{
                 display: 'flex',
                 flexDirection: 'row',
-                flexWrap: 'wrap',
                 justifyContent: 'space-evenly',
                 alignItems: 'center',
                 width: '100%',
@@ -94,8 +94,18 @@ export const CameraSample: React.FC = () => {
                             <div key={i} className="sample" style={{
                                 transform: `translate3d(${divTranslation}px, 0, 0)`,
                                 position: 'relative',
+                                width: '13%',
                             }} >
-                                <img width="120px" src={sample.imgsrc} alt={sample.name} />
+                                <Img width="100%" src={sample.imgsrc} alt={sample.name} />
+                                <div
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                }}
+                                >
+
                                 <h3>{sample.name}</h3>
                                 <h3 style={{
                                     opacity: interpolate(
@@ -108,6 +118,7 @@ export const CameraSample: React.FC = () => {
                                         }
                                     )
                                 }}>{sample.price}</h3>
+                                </div>
                             </div>
                         )
                     })

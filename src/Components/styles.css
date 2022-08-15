@@ -18,4 +18,6 @@
     font-family: 'IBM Plex Serif';
     font-size: 1.6em;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
 }
