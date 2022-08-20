@@ -12,12 +12,13 @@ import photo from './assets/iphone.png';
 
 interface contextInterface {
   inputText: string;
-  url: string;
+  sound1: string;
+  sound2: string;
   // array of image tag
   images: Array<HTMLImageElement>;
 }
 
-export const Value = createContext<contextInterface>({ inputText: '', url: '' , images: []});
+export const Value = createContext<contextInterface>({ inputText: '', sound1: '', sound2: '', images: [] });
 
 const App: React.FC = () => {
   const [inputText, setinputText] = useState<string>("");
@@ -25,7 +26,8 @@ const App: React.FC = () => {
   const [player, setPlayer] = useState<boolean | null>(false);
   const [images, setImages] = useState<Array<HTMLImageElement>>([]);
 
-  const [url, setUrl] = useState<string>("");
+  const [sound1, setSound1] = useState<string>("");
+  const [sound2, setSound2] = useState<string>("");
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -78,25 +80,55 @@ const App: React.FC = () => {
       })
     }
     )).then(() => {
-      setIsLoading(false);
-    }
-    )
+      fetch('http://localhost:3000/getAudio', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          text: "Introducing"
+        })
+      }).then((response: Response) => {
+        response.blob().then((blob: Blob) => {
+          const url = URL.createObjectURL(blob);
+          setSound1(url);
+        }).catch(err => {
+          console.log(err);
+        })
+        .then(() => {
+          fetch('http://localhost:3000/getAudio',{
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              text: "The new Iphone 14 pro"
+            })
+          }).then((response: Response) => {
+            response.blob().then((blob: Blob) => {
+              const url = URL.createObjectURL(blob);
+              setSound2(url);
+            })
+          })
+        })
+      }).then(() => {
+        setIsLoading(false);
+      })
+    })
     
-
-  },[]);
+  }, []);
 
 
   return (
-    <Value.Provider value={{inputText,url, images}} >
+    <Value.Provider value={{ inputText, sound1,sound2, images }} >
       <div>
-        { isLoading ? <div>
-          Loading </div> :  <Player
+        {isLoading ? <div>
+          Loading </div> : <Player
           component={Demo}
-          durationInFrames={1800}
+          durationInFrames={1050}
           compositionHeight={500}
           compositionWidth={900}
           controls
-          doubleClickToFullscreen
           allowFullscreen
           autoPlay={false}
           fps={30}

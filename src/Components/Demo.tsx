@@ -68,6 +68,15 @@ export const Demo: React.FC = () => {
 
   // );
 
+  const interPolateVolume = interpolate(
+    frame,
+    [0, 200, 201, 230],
+    [0.1, 0.1, 0.2, 1],
+    {
+      easing: Easing.ease
+    }
+  );
+
   const spring1 = spring({
     frame: frame - 50,
     fps: fps + 100,
@@ -83,6 +92,8 @@ export const Demo: React.FC = () => {
 
       <Sequence from={0}>
         <AbsoluteFill className='background' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        { value?.sound1 && <Audio src={value?.sound1}
+/>}
           <div
             className='introText'
             style={{
@@ -93,6 +104,7 @@ export const Demo: React.FC = () => {
       </Sequence>
       <Sequence from={120}>
         <AbsoluteFill style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'black' }}>
+          <Audio src={value?.sound2} />
           <Title titleText='The new Iphone 14 pro' titleColor='#FF9803' />
         </AbsoluteFill>
       </Sequence>
@@ -106,7 +118,7 @@ export const Demo: React.FC = () => {
         <CameraSample />
       </Sequence>
 
-      <Audio src={audio} >
+      <Audio src={audio} volume={interPolateVolume} >
       </Audio>
     </div>
 
